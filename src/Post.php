@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model implements TaggableInterface
 {
+    protected $table = 'postswp';
     use TaggableTrait;
 
     /**
@@ -52,8 +53,9 @@ class Post extends Model implements TaggableInterface
     }
 
     /**
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @param  string                               $slug
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param  string  $slug
+     *
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeSlug($query, $slug)
@@ -63,10 +65,9 @@ class Post extends Model implements TaggableInterface
 
     public function setCategory(array $categoryData)
     {
-        if (! empty($categoryData)) {
-
+        if (!empty($categoryData)) {
             $category = Category::where('wp_id', $categoryData['wp_id'])
-                                ->first();
+                ->first();
 
             if (is_null($category)) {
                 $category = Category::create($categoryData);
@@ -83,10 +84,9 @@ class Post extends Model implements TaggableInterface
 
     public function setAuthor(array $authorData)
     {
-        if (! empty($authorData)) {
-
+        if (!empty($authorData)) {
             $author = Author::where('wp_id', $authorData['wp_id'])
-                            ->first();
+                ->first();
 
             if (is_null($author)) {
                 $author = Author::create($authorData);

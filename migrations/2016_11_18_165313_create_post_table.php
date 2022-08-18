@@ -13,7 +13,7 @@ class CreatePostTable extends Migration
      */
     public function up()
     {
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('postswp', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('wp_id')->unique();
             $table->string('type');
